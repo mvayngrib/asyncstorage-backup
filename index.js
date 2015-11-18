@@ -92,6 +92,14 @@ export function backup() {
     .then(() => backupNumber)
 }
 
+export function clear () {
+  return AsyncStorage.getAllKeys()
+    .then((keys) => {
+      keys = keys.filter((k) => k.indexOf(BACKUP_PREFIX) !== 0)
+      return AsyncStorage.multiRemove(keys)
+    })
+}
+
 function getLastBackupNumber (keys) {
   return keys.reduce((memo, next) => {
     if (next.indexOf(BACKUP_PREFIX) !== 0) {
