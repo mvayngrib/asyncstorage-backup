@@ -16,9 +16,7 @@ export function promptLoadFromBackup () {
     .then((n) => {
       var choices = []
       if (n === -1) {
-        return AlertIOS.alert(
-          'No backups found',
-        )
+        throw new Error('No backups found')
       }
 
       return new Promise((resolve, reject) => {
